@@ -7,6 +7,8 @@ from game.game_logic import ChessGame
 class ChessUI:
     def __init__(self):
 
+        os.environ['SDL_AUDIODRIVER'] = 'dummy'
+
         pygame.init()
         self.screen_width = 800
         self.screen_height = 600
@@ -35,8 +37,16 @@ class ChessUI:
             'Qb': pygame.image.load(os.path.join('assets', 'images', 'black_queen.png')).convert_alpha(),
             'Kb': pygame.image.load(os.path.join('assets', 'images', 'black_king.png')).convert_alpha(),
         }
-        self.board_image = pygame.image.load(os.path.join('assets', 'images', 'board.png')).convert_alpha()
-        self.board_image = pygame.transform.scale(self.board_image, (self.cell_size * 8, self.cell_size * 8))
+
+        board_img_path = os.path.join('assets', 'images', 'board.png')
+        if os.path.exists(board_img_path):
+            self.board_image = pygame.image.load(board_img_path).convert_alpha()
+            self.board_image = pygame.transform.scale(self.board_image, 
+                                                   (self.cell_size * 8, self.cell_size * 8))
+        else:
+            self.board_image = pygame.Surface((self.cell_size * 8, self.cell_size * 8))
+            self.board_image.fill((0, 0, 0))
+            print
         
     def draw_board(self):
         self.screen.blit(self.board_image, self.board_offset)
