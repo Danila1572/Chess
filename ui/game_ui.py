@@ -12,10 +12,11 @@ class ChessUI:
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption("Шахматы")
         
-        self.game = ChessGame()
-        self.load_images()
         self.cell_size = 60
         self.board_offset = (50, 50)
+        
+        self.game = ChessGame()
+        self.load_images()
         self.font = pygame.font.SysFont('Arial', 24)
         
     def load_images(self):
@@ -33,8 +34,16 @@ class ChessUI:
             'Qb': pygame.image.load(os.path.join('assets', 'images', 'black_queen.png')).convert_alpha(),
             'Kb': pygame.image.load(os.path.join('assets', 'images', 'black_king.png')).convert_alpha(),
         }
-        self.board_image = pygame.image.load(os.path.join('assets', 'images', 'board.png')).convert_alpha()
-        self.board_image = pygame.transform.scale(self.board_image, (self.cell_size * 8, self.cell_size * 8))
+        
+        board_img_path = os.path.join('assets', 'images', 'board.png')
+        if os.path.exists(board_img_path):
+            self.board_image = pygame.image.load(board_img_path).convert_alpha()
+            self.board_image = pygame.transform.scale(self.board_image, 
+                                                   (self.cell_size * 8, self.cell_size * 8))
+        else:
+            self.board_image = pygame.Surface((self.cell_size * 8, self.cell_size * 8))
+            self.board_image.fill((0, 0, 0))
+            print
         
     def draw_board(self):
         self.screen.blit(self.board_image, self.board_offset)
