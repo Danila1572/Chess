@@ -1,4 +1,4 @@
-from .chess_pieces import Pawn, Rook, Horse, Bishop, Queen, King
+from .chess_pieces import Pawn, Rook, Knight, Bishop, Queen, King
 
 
 class ChessBoard:
@@ -19,10 +19,10 @@ class ChessBoard:
         self.board[7][0] = Rook('white', (0, 7))
         self.board[7][7] = Rook('white', (7, 7))
         
-        self.board[0][1] = Horse('black', (1, 0))
-        self.board[0][6] = Horse('black', (6, 0))
-        self.board[7][1] = Horse('white', (1, 7))
-        self.board[7][6] = Horse('white', (6, 7))
+        self.board[0][1] = Knight('black', (1, 0))
+        self.board[0][6] = Knight('black', (6, 0))
+        self.board[7][1] = Knight('white', (1, 7))
+        self.board[7][6] = Knight('white', (6, 7))
         
         self.board[0][2] = Bishop('black', (2, 0))
         self.board[0][5] = Bishop('black', (5, 0))
