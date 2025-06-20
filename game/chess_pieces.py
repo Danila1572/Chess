@@ -15,6 +15,9 @@ class Piece:
     def __str__(self):
         return f"{self.color[0]}{self.__class__.__name__[0]}"
 
+    def get_type(self):
+        return self.__class__.__name__.lower()[0]
+
 
 class Pawn(Piece):
     def __init__(self, color, position):
